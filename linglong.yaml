@@ -1,0 +1,29 @@
+version: "1"
+
+package:
+  id: io.github.mattermost-qt
+  name: mattermost-qt
+  version: 0.1.2.1
+  kind: app
+  description: |
+    Mattermost native desktop client, using the QT framework
+
+command:
+  - /opt/apps/io.github.mattermost-qt/files/bin/mattermost-qt
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/nuclear868/mattermost-qt.git
+    version: master
+    commit: f2584c1d57ed79d00d340f5172a0ba14c23e55df
+
+build: |
+  cd /project/linglong/sources/mattermost-qt.git
+  mkdir build
+  cd build
+  cmake .. \
+        -DCMAKE_INSTALL_PREFIX=${PREFIX}
+  cmake --build . --target install
